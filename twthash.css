@@ -1,0 +1,97 @@
+body
+{
+	margin: 0px;
+}
+
+.profilepic {
+	border-color: rgba(0, 0, 0, 0.04);
+	border-width: 1px;
+	border-radius: 9999px;
+	padding-left: 8px;
+	padding-top: 4px;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:active {
+	text-decoration: underline;
+}
+
+.nickname a {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+	overflow-wrap: break-word;
+	line-height: 1.3125;
+	color: rgb(20, 23, 26);
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.userid a {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+	overflow-wrap: break-word;
+	line-height: 1.3125;
+	color: rgb(101, 119, 134);
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.twttime {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+	overflow-wrap: break-word;
+	line-height: 1.3125;
+	color: rgb(101, 119, 134);
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.div_inline {
+	display: inline-block
+}
+
+.name_dot {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+	overflow-wrap: break-word;
+	line-height: 1.3125;
+	color: rgb(101, 119, 134);
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.nametext_margin {
+	margin-right: 6px;
+}
+
+.profile_margin {
+	margin-right: 12px;
+}
+
+.profile_box {
+	float: left;
+	height: 100%;
+}
+
+.contents_box {
+	float: none;
+}
+
+.text_box {
+	display: flex;
+}
+
+.twt_box {
+	margin-bottom: 14px;
+	padding-bottom: 14px;
+	border-width: 1px;
+	border-color: rgb(216, 224, 232);
+	border-bottom-style: solid
+}

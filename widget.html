@@ -1,7 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+    <meta charset="utf-8" />
+    <title>IM@S Korea Hashtag Service</title>
+    <link href="twthash.css" rel="stylesheet">
+</head>
 <body>
-<iframe src="http://ec2-18-176-54-69.ap-northeast-1.compute.amazonaws.com/static/twthash.html" style="display:block; width:100vw; height: 100vh; border: 0px; padding: 0px; margin: 0px"></iframe>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="jquery.timeago.js"></script>
+    <script type="text/javascript">
+        var lastId = null;
+        var isFirst = true;
+
+        jQuery.timeago.settings.strings = {
+            prefixAgo: null, prefixFromNow: null,
+            suffixAgo: "", suffixFromNow: "",
+            seconds: "%ds",
+            minute: "1m", minutes: "%dm",
+            hour: "1h", hours: "%dh",
+            day: "1d", days: "%dd",
+            month: "1mo", months: "%dmo",
+            year: "1yr", years: "%dyr",
+            wordSeparator: " ",
+            numbers: []
+        };
+
+        function Update() {
+            var queryData = {};
+            if (isFirst) {
+                queryData.isFirst = 1;
+            }
+            isFirst = false;
+            if (lastId !== null) {
+                queryData.lastId = lastId;
+            }
+            $.ajax({
+                type: "GET", 
+                url: "http://ec2-18-176-54-69.ap-northeast-1.compute.amazonaws.com/twtsearch/jsonp", 
+                data: queryData,
+                dataType: "jsonp", 
+                success: function (data) {
+                    if (data.Tweets.length > 0) {
+                        lastId = data.Tweets[0].Id;
+                        data.Tweets.reverse();
+                        data.Tweets.forEach(function (currentTweet) {
+                            $("#tweets_holder").prepend("<div class=\"twt_box\">"
+                                + "<div class=\"profile_box profile_margin\"><a href=\"https://twitter.com/" + currentTweet.UserScreenName + "\"><img class=\"profilepic\" src=\"" + currentTweet.UserProfileImg + "\" /></a></div>"
+                                + "<div class=\"contents_box\"><div><div class=\"nickname div_inline nametext_margin\"><a href=\"https://twitter.com/" + currentTweet.UserScreenName + "\">" + currentTweet.UserName + "</a></div>"
+                                + "<div class=\"userid div_inline nametext_margin\"><a href=\"https://twitter.com/" + currentTweet.UserScreenName + "\">@" + currentTweet.UserScreenName + "</a></div>"
+                                + "<div class=\"div_inline nametext_margin\"><span class=\"name_dot\">·</span></div>"
+                                + "<div class=\"div_inline\"><a class=\"twttime\" href=\"https://twitter.com/" + currentTweet.UserScreenName + "/status/" + currentTweet.Id + "\"><time id=\"tt" + currentTweet.Id + "\" class=\"twttime\" datetime=\"" + currentTweet.CreatedTime + "\"></time></a></div></div>"
+                                + "<div class=\"text_box\"><span>" + currentTweet.Text + "</span></div>"
+                                + "</div></div>");
+                            $("#tt" + currentTweet.Id).timeago();
+                        });
+                    }
+                }
+            });
+        }
+
+        Update();
+        setInterval(Update, 5000);
+    </script>
+
+    <div id="tweets_holder">
+    </div>
 </body>
 </html>
